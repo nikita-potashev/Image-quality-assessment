@@ -4,19 +4,7 @@ import glob
 import os
 
 
-def parse_zip(path):
-    """[summary]
-
-    Arguments:
-        path [string] -- path to parse all zip files in folder
-
-    Returns:
-        [list] -- list of paths to all zips
-    """
-    pass
-
-
-def extract_zip(path):
+def extract_zip(path, new_path):
     """[summary]
 
     Arguments:
@@ -25,8 +13,18 @@ def extract_zip(path):
     Returns:
         [list] -- ??
     """
-    pass
+    zips = glob.glob(path)
+
+    if len(zips) == 0:
+        print("No zips there.")
+
+    for item in zips:
+        zip_ref = zipfile.ZipFile(item, 'r')
+        zip_ref.extractall(new_path)
+        zip_ref.close()
 
 
 if __name__ == "__main__":
     print(os.getcwd())
+    extract_zip('data/blur/*.zip', 'data/blur/train/')
+
