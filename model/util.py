@@ -29,4 +29,4 @@ def extract_zip(path):
 
 
 if __name__ == "__main__":
-    print(os.system("pwd"))
+    print(os.getcwd())
