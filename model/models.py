@@ -7,7 +7,7 @@ def blur_model(input_shape):
     """[summary]
 
     Arguments:
-        input_shape [tuple] -- Height,Width,Channels of image
+        input_shape [tuple] -- height,hidth,channels of image
 
     Returns:
         [model] -- simple cnn model
