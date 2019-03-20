@@ -2,29 +2,36 @@ import zipfile
 import shutil
 import glob
 import os
+import argparse
 
-
-def extract_zip(path, new_path):
+def extract_zip(src, dst):
     """[summary]
 
     Arguments:
-        path [string] -- extract from zip
+        src [string] -- extract from zip
 
     Returns:
         [list] -- ??
     """
-    zips = glob.glob(path)
+    zips = glob.glob(src)
 
-    if len(zips) == 0:
+    if zips:
         print("No zips there.")
 
     for item in zips:
         zip_ref = zipfile.ZipFile(item, 'r')
-        zip_ref.extractall(new_path)
+        zip_ref.extractall(dst)
         zip_ref.close()
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
     print(os.getcwd())
-    extract_zip('data/blur/*.zip', 'data/blur/train/')
 
+    parser.add_argument('--src', type=str,
+                        help='Source of data')
+    parser.add_argument('--dst', type=str,
+                        help='Destination to unpack')
+
+    args = parser.parse_args()
+    extract_zip(args.src, args.dst)
