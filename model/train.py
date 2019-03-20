@@ -41,8 +41,8 @@ if __name__ == "__main__":
                         help='Batch size for model', default=32)
     parser.add_argument('--num_epochs', type=int,
                         help='Number of epochs', default=10)
-    parser.add_argument('--debug', type=bool,
-                        help='If true, train on small dataset(for testing)', default=True)
+    parser.add_argument('--train_mode', type=str,
+                        help='cluster or pc(small dataset)', default='pc')
     parser.add_argument('--input_shape', nargs='+', type=int,
                         help='Height, width, channel size')
 
@@ -73,11 +73,11 @@ if __name__ == "__main__":
 
         print(len(dist+undist))
 
-        if args.debug == True:
+        if args.train_mode = 'pc':
             dist = dist[:50]
             undist = undist[:50]
             train(dist,undist,args)
-        else:
+        if args.train_mode = 'cluster':
             train(dist,undist,args)
 
     if args.model == "Noise":
