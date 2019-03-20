@@ -4,8 +4,34 @@ import preproc
 import glob
 import os
 
-from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 import time
+
+
+def train(dist,undist,args):
+    X_train, X_test, y_train, y_test = preproc.load_data(
+        dist, undist, args.input_shape, 0.25)
+    model = models.blur_model(tuple(args.input_shape))
+
+    current_time = time.strftime("%H:%M:%S", time.localtime())
+
+    callbacks = [EarlyStopping(monitor='val_loss', patience=2),
+                 ModelCheckpoint(filepath='weights/BlurBestScore_{}.h5'.format(current_time),
+                                 monitor='val_loss',
+                                 save_best_only=True,
+                                 mode='auto')
+                 ]
+
+    model.fit(X_train, y_train,
+              callbacks=callbacks,
+              batch_size=args.batch_size,
+              epochs=args.num_epochs,
+              verbose=2,
+              validation_data=(X_test, y_test))
+    score = model.evaluate(X_test, y_test, verbose=2)
+    print('Test Loss:', score[0])
+    print('Test accuracy:', score[1])
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -50,28 +76,9 @@ if __name__ == "__main__":
         if args.debug == True:
             dist = dist[:50]
             undist = undist[:50]
-            X_train, X_test, y_train, y_test = preproc.load_data(
-                dist, undist, args.input_shape, 0.25)
-            model = models.blur_model(tuple(args.input_shape))
-
-            current_time = time.strftime("%H:%M:%S", time.localtime())
-
-            callbacks = [EarlyStopping(monitor='val_loss', patience=2),
-                         ModelCheckpoint(filepath='weights/BlurBestScore_{}.h5'.format(current_time),
-                                         monitor='val_loss',
-                                         save_best_only=True,
-                                         mode='auto')
-                         ]
-
-            model.fit(X_train, y_train,
-                      callbacks=callbacks,
-                      batch_size=args.batch_size,
-                      epochs=args.num_epochs,
-                      verbose=2,
-                      validation_data=(X_test, y_test))
-            score = model.evaluate(X_test, y_test, verbose=2)
-            print('Test Loss:', score[0])
-            print('Test accuracy:', score[1])
+            train(dist,undist,args)
+        else:
+            train(dist,undist,args)
 
     if args.model == "Noise":
         print("Noise")
