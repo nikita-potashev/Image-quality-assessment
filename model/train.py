@@ -73,11 +73,11 @@ if __name__ == "__main__":
 
         print(len(dist+undist))
 
-        if args.train_mode = 'pc':
+        if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
             train(dist,undist,args)
-        if args.train_mode = 'cluster':
+        if args.train_mode == 'cluster':
             train(dist,undist,args)
 
     if args.model == "Noise":
