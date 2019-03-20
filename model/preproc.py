@@ -7,7 +7,7 @@ from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 
 
-def read_img(path, input_shape, color_mode=''):
+def read_img(path, input_shape, color_mode='grayscale'):
     """[summary]
 
     Arguments:
@@ -39,12 +39,12 @@ def load_imgs(lst, input_shape, color_mode=''):
     return temp/255.0
 
 
-def load_data(distorted_path, undistorted_path, input_shape, test_size, color_mode=''):
+def load_data(dist, undist, input_shape, test_size, color_mode='grayscale'):
     """[summary]
 
     Arguments:
-        distorted_path {[string]} -- [path to distored images folder]
-        undistorted_path {[string]} -- [path to distored images folder]
+        dist {[list]} -- [list of paths to distored images]
+        undist {[list]} -- [list of paths to distored images]
         input_shape {[tuple]} -- [height,hidth,channels of image]
         test_size {[float]} -- [test size to split]
 
@@ -54,9 +54,6 @@ def load_data(distorted_path, undistorted_path, input_shape, test_size, color_mo
     Returns:
         [tuple] -- [test,train data and labels]
     """
-    # parse all files
-    dist = glob.glob(distorted_path)
-    undist = glob.glob(undistorted_path)
     # labels for images
     labels_dist = np.ones(len(dist)).astype('int')
     labels_undist = np.zeros(len(undist)).astype('int')
@@ -70,5 +67,8 @@ def load_data(distorted_path, undistorted_path, input_shape, test_size, color_mo
 
     X_train, X_test, y_train, y_test = train_test_split(
         x, y, test_size=test_size, random_state=2)
+
+    X_train = load_imgs(X_train, input_shape, color_mode)
+    X_test = load_imgs(X_test, input_shape, color_mode)
 
     return (X_train, X_test, y_train, y_test)
