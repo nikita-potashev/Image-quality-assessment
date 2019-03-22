@@ -20,6 +20,7 @@ def blur_model(input_shape):
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.2))
 
+    model.add(Flatten())
     model.add(Dropout(0.2))
     model.add(Dense(32, activation='relu'))
 
