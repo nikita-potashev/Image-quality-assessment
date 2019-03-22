@@ -15,7 +15,7 @@ def extract_zip(src, dst):
     """
     zips = glob.glob(src)
 
-    if !zips:
+    if not zips:
         print("No zips there.")
 
     for item in zips:
