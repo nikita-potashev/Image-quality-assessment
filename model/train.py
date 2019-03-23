@@ -18,7 +18,7 @@ def train(dist,undist,args):
     current_time = time.strftime("%H:%M:%S", time.localtime())
 
     callbacks = [EarlyStopping(monitor='val_loss', patience=2),
-                 ModelCheckpoint(filepath='weights/BlurBestScore_{}.h5'.format(current_time),
+                 ModelCheckpoint(filepath='weights/{}_{}.h5'.format(args.model,current_time),
                                  monitor='val_loss',
                                  save_best_only=True,
                                  mode='auto')
