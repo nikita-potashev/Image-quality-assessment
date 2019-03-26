@@ -1,7 +1,9 @@
-from keras.models import model_from_json
 import glob
+
+import numpy as np
+from keras.models import model_from_json
+
 from model import preproc
-import numpy as np 
 
 if __name__ == "__main__":
     # json_file = open("model/json/arch/blur.json", "r")
@@ -16,20 +18,5 @@ if __name__ == "__main__":
 
     # blurred = preproc.load_imgs(data,(250,250,1),'grayscale')
 
-
     # score = model.predict_classes(blurred)
     # print(score)
-
-    data = glob.glob('model/data/blur/train/image/*')
-    print(len(data))
-    s= 0
-    for i in range(1000):
-        img = preproc.read_img(data[i],(500,500,3),'rgb')
-        r, g, b    = img[:, :, 0], img[:, :, 1], img[:, :, 2] 
-        Y = (0.299*r+0.587*g+0.114*b)
-     
-        Ymax = np.max(Y)
-        Y= np.sum(Y)/(500*500)
-        s+=Y/Ymax
-    print(s/1000)
-        
