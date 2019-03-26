@@ -20,6 +20,10 @@
 2. https://www.eecs.yorku.ca/~kamel/sidd/dataset.php
 3. http://www.cs.utoronto.ca/~strider/Denoise/Benchmark/
 
+## Brightness
+
+1. http://www.aiportal.ru/articles/other/evaluation-of-image-quality.html
+
 
 ## Source
 
