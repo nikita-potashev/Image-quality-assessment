@@ -1,3 +1,4 @@
+import numpy as np
 from keras.layers import (Activation, Conv2D, Dense, Dropout, Flatten,
                           MaxPooling2D)
 from keras.models import Sequential
@@ -67,18 +68,17 @@ def noise_model(input_shape):
     return model
 
 
-def bright_model(img, input_shape):
+def bright_model(img):
     """[summary]
 
     Arguments:
-        input_shape {[type]} -- [height,hidth,channels of image]
-        img {[n]}
+        img {[numpy_array]} -- [image as np array]
     Returns:
         [float] -- [ [0,1] bright coef of image ]
     """
     r, g, b = img[:, :, 0], img[:, :, 1], img[:, :, 2]
     Y = (0.299*r+0.587*g+0.114*b)  # coefs rec by FCC
     Ymax = np.max(Y)
-    Y = np.sum(Y)/(input_shape[0]*input_shape[1])
+    Y = np.sum(Y)/(img.shape[0]*img.shape[1])
 
     return Y/Ymax
