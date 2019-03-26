@@ -5,6 +5,9 @@ from keras.models import model_from_json
 
 from model import preproc
 
+def voting_predict():
+    pass
+
 if __name__ == "__main__":
     # json_file = open("model/json/arch/blur.json", "r")
     # loaded_model_json = json_file.read()
