@@ -1,10 +1,10 @@
 import glob
-import numpy as np
-from keras.utils import np_utils
-from keras.preprocessing import image
 
-from sklearn.utils import shuffle
+import numpy as np
+from keras.preprocessing import image
+from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 
 def read_img(path, input_shape, color_mode='grayscale'):
@@ -12,7 +12,7 @@ def read_img(path, input_shape, color_mode='grayscale'):
 
     Arguments:
         path {[string]}
-        input_shape {[tuple]} -- target shape
+        input_shape {[tuple]} -- [height,hidth,channels of image]
 
     Returns:
         [numpy array] -- return image as numpy array
