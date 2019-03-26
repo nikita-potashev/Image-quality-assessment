@@ -1,24 +1,25 @@
 import argparse
-import models
-import preproc
 import glob
 import os
-
-from keras.callbacks import EarlyStopping, ModelCheckpoint
-from keras import backend as k
-import tensorflow as tf
 import time
 
+import tensorflow as tf
+from keras import backend as k
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 
-def train(dist,undist,args):
+import models
+import preproc
+
+
+def train(model, dist, undist, args):
     X_train, X_test, y_train, y_test = preproc.load_data(
         dist, undist, args.input_shape, 0.25)
-    model = models.blur_model(tuple(args.input_shape))
+    # model = models.blur_model(tuple(args.input_shape))
 
     current_time = time.strftime("%H:%M:%S", time.localtime())
 
     callbacks = [EarlyStopping(monitor='val_loss', patience=2),
-                 ModelCheckpoint(filepath='weights/{}_{}.h5'.format(args.model,current_time),
+                 ModelCheckpoint(filepath='weights/{}_{}.h5'.format(args.model, current_time),
                                  monitor='val_loss',
                                  save_best_only=True,
                                  mode='auto')
@@ -38,8 +39,8 @@ def train(dist,undist,args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    config = tf.ConfigProto(intra_op_parallelism_threads=20, inter_op_parallelism_threads=20, \
-                    allow_soft_placement=True, device_count = {'CPU': 1})
+    config = tf.ConfigProto(intra_op_parallelism_threads=20, inter_op_parallelism_threads=20,
+                            allow_soft_placement=True, device_count={'CPU': 1})
     session = tf.Session(config=config)
     k.set_session(session)
 
@@ -80,12 +81,28 @@ if __name__ == "__main__":
 
         print(len(dist+undist))
 
+        blur_model = models.blur_model(args.input_shape)
         if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
-            train(dist,undist,args)
+            train(blur_model, dist, undist, args)
         if args.train_mode == 'cluster':
-            train(dist,undist,args)
+            train(blur_model, dist, undist, args)
 
     if args.model == "Noise":
-        print("Noise")
+
+        undist = glob.glob(
+            'data/blur/train/CERTH_ImageBlurDataset/TrainingSet/Undistorted/*')
+
+        dist = glob.glob('data/noise/train/data/**/*.JPG', recursive=True)
+        dist += glob.glob('data/noise/train/BSDBursts/**/*.png', recursive=True)
+
+        print(len(dist))
+        print(len(undist))
+        noise_model = models.noise_model(args.input_shape)
+        if args.train_mode == 'pc':
+            dist = dist[:50]
+            undist = undist[:50]
+            train(noise_model, dist, undist, args)
+        if args.train_mode == 'cluster':
+            train(noise_model, dist, undist, args)
