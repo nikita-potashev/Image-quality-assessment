@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
         print(len(dist+undist))
 
-        blur_model = models.blur_model(args.input_shape,args.metric,args.last_activ,args.loss)
+        blur_model = models.blur_model(args.input_shape,args.metric,args.last_act,args.loss)
         if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
         print(len(dist))
         print(len(undist))
-        noise_model = models.noise_model(args.input_shape,args.metric,args.last_activ,args.loss)
+        noise_model = models.noise_model(args.input_shape,args.metric,args.last_act,args.loss)
         if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
