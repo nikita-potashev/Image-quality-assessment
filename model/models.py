@@ -4,7 +4,7 @@ from keras.layers import (Activation, Conv2D, Dense, Dropout, Flatten,
 from keras.models import Sequential
 
 
-def blur_model(input_shape,metric):
+def blur_model(input_shape,metric,last_activ,loss):
     """[summary]
 
     Arguments:
@@ -27,15 +27,15 @@ def blur_model(input_shape,metric):
     model.add(Dense(16, activation='relu'))
     model.add(Dropout(0.3))
 
-    model.add(Dense(2, activation='sigmoid'))
+    model.add(Dense(2, activation=last_activ))
 
-    model.compile(loss='binary_crossentropy',
+    model.compile(loss=loss
                   optimizer='adam',
                   metrics=[metric])
     return model
 
 
-def noise_model(input_shape,metric):
+def noise_model(input_shape,metric,last_activ,loss):
     """[summary]
 
     Arguments:
@@ -60,9 +60,9 @@ def noise_model(input_shape,metric):
     model.add(Activation('relu'))
     model.add(Dropout(0.2))
     model.add(Dense(2))
-    model.add(Activation('sigmoid'))
+    model.add(Activation(last_activ))
 
-    model.compile(loss='binary_crossentropy',
+    model.compile(loss=loss,
                   optimizer='adam',
                   metrics=[metric])
     return model
