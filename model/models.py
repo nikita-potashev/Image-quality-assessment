@@ -46,17 +46,17 @@ def noise_model(input_shape,metric):
     """
 
     model = Sequential()
-    model.add(Conv2D(32, 5, 5, input_shape=input_shape))
+    model.add(Conv2D(4, 3, 3, input_shape=input_shape))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.2))
-    model.add(Conv2D(64, 3, 3))
+    model.add(Conv2D(8, 5, 5))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.2))
 
     model.add(Flatten())
-    model.add(Dense(64))
+    model.add(Dense(16))
     model.add(Activation('relu'))
     model.add(Dropout(0.2))
     model.add(Dense(2))

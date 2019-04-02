@@ -85,8 +85,8 @@ def voting_predict():
     print(predictTemp)
     print(yTemp)  
 
-    print(np.concatenate((predict,predictTemp)),axis=None)
-    print(np.concatenate((y,yTemp)),axis=None)
+    # print(np.concatenate((predict,predictTemp)),axis=None)
+    # print(np.concatenate((y,yTemp)),axis=None)
     # Xtemp  = np.stack((np.array(score1), np.array(score2),np.array(score3)), axis=-1)
     # X = np.concatenate((X,Xtemp),axis=None)
     # y = np.concatenate((y, np.zeros(len(score3))), axis=None)
