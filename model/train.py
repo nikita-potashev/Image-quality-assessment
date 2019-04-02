@@ -53,6 +53,8 @@ if __name__ == "__main__":
                         help='cluster or pc(small dataset)', default='pc')
     parser.add_argument('--input_shape', nargs='+', type=int,
                         help='Height, width, channel size')
+    parser.add_argument('--metric', type=str)
+
 
     args = parser.parse_args()
     print(os.getcwd())
@@ -81,7 +83,7 @@ if __name__ == "__main__":
 
         print(len(dist+undist))
 
-        blur_model = models.blur_model(args.input_shape)
+        blur_model = models.blur_model(args.input_shape,args.metric)
         if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
@@ -99,7 +101,7 @@ if __name__ == "__main__":
 
         print(len(dist))
         print(len(undist))
-        noise_model = models.noise_model(args.input_shape)
+        noise_model = models.noise_model(args.input_shape,args.metric)
         if args.train_mode == 'pc':
             dist = dist[:50]
             undist = undist[:50]
