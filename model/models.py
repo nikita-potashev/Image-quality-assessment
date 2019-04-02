@@ -29,7 +29,7 @@ def blur_model(input_shape,metric,last_activ,loss):
 
     model.add(Dense(2, activation=last_activ))
 
-    model.compile(loss=loss
+    model.compile(loss=loss,
                   optimizer='adam',
                   metrics=[metric])
     return model
