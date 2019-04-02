@@ -40,7 +40,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     config = tf.ConfigProto(intra_op_parallelism_threads=20, inter_op_parallelism_threads=20,
-                            allow_soft_placement=True, device_count={'CPU': 1})
+                            allow_soft_placement=True)
     session = tf.Session(config=config)
     k.set_session(session)
 
