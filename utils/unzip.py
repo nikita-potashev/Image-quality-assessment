@@ -5,14 +5,6 @@ import os
 import argparse
 
 def extract_zip(src, dst):
-    """[summary]
-
-    Arguments:
-        src [string] -- extract from zip
-
-    Returns:
-        [list] -- ??
-    """
     zips = glob.glob(src)
 
     if not zips:

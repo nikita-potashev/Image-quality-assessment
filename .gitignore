@@ -107,13 +107,7 @@ venv.bak/
 .vscode/
 
 # dataset
-data/
+datasets/
 
-# weights
-weights/
-
-# models archs
-model/json/arch/
-
-# logs
-logs/
+# experiments
+experiments/

@@ -1,5 +1,14 @@
 # Image quality assessment
 
+## How to 
+### Prep data
+`python3 utils/unzip.py --src=datasets/blur/* --dst=datasets/blur/train/`
+`python3 utils/unzip.py --src=datasets/noise/* --dst=datasets/noise/train/`
+### Train by config
+`python3 main.py -c configs/blur_model.json`
+
+Thx to [Keras Template](https://github.com/Ahmkel/Keras-Project-Template)
+
 ## Sharpness 
 * TOTAL: 8432, %100
 * CLEAR: 3606, %42.76565464895636
