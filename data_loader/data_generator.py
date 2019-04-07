@@ -1,8 +1,8 @@
 import glob
 
 import numpy as np
-from keras.preprocessing import image
-from keras.utils import np_utils
+from tensorflow.python.keras.preprocessing import image
+from tensorflow.python.keras.utils import np_utils
 from sklearn.model_selection import train_test_split
 
 
@@ -19,6 +19,7 @@ class DataGenerator:
         for path in undistorted_paths:
             undist += glob.glob(path, recursive=True)
 
+        print(config.debug)
         if config.debug:
             dist = dist[:10]
             undist = undist[:10]

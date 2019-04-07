@@ -19,6 +19,6 @@
       "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Undistorted/*",
       "datasets/blur/train/CERTH_ImageBlurDataset/EvaluationSet/DigitalBlurSet/Orig*"
     ],
-    "debug":"False",
+    "debug":0,
     "color_mode":"grayscale"
   }
