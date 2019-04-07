@@ -1,0 +1,24 @@
+{
+    "exp_name": "blur_model",
+    "num_epochs": 10,
+    "learning_rate": 0.001,
+    "optimizer": "adam",
+    "batch_size": 64,
+    "validation_split": 0.25,
+    "distorted": [
+      "datasets/blur/train/All_Image_and_Kernels/blur*.jpg",
+      "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Artificially-Blurred/*",
+      "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Naturally-Blurred/*",
+      "datasets/blur/train/CERTH_ImageBlurDataset/EvaluationSet/DigitalBlurSet/Disk*",
+      "datasets/blur/train/CERTH_ImageBlurDataset/EvaluationSet/DigitalBlurSet/Gauss*",
+      "datasets/blur/train/CERTH_ImageBlurDataset/EvaluationSet/DigitalBlurSet/Motion*"
+    ],
+    "undistorted": [
+      "datasets/blur/train/image/*",
+      "datasets/blur/train/All_Image_and_Kernels/im*.jpg",
+      "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Undistorted/*",
+      "datasets/blur/train/CERTH_ImageBlurDataset/EvaluationSet/DigitalBlurSet/Orig*"
+    ],
+    "debug":"False",
+    "color_mode":"grayscale"
+  }
