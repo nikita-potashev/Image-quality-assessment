@@ -14,6 +14,9 @@ class DataGenerator:
         print(undistorted_paths)
         print(distorted_paths)
 
+        dist = []
+        undist = []
+
         for path in distorted_paths:
             dist += glob.glob(path, recursive=True)
         for path in undistorted_paths:
