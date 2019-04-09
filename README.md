@@ -15,6 +15,7 @@ python3 main.py -c configs/blur_model.json
 
 Thx to [Keras Template](https://github.com/Ahmkel/Keras-Project-Template)
 
+### TensorBoard
 ```shell
 tensorboard --logd=experiments/noise_model/summary
 ```
