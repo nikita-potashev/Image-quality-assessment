@@ -11,15 +11,18 @@ class DataGenerator:
         distorted_paths = config.distorted
         undistorted_paths = config.undistorted
 
-        dist = []
-        undist = []
+        print(undistorted_paths)
+        print(distorted_paths)
 
         for path in distorted_paths:
             dist += glob.glob(path, recursive=True)
         for path in undistorted_paths:
             undist += glob.glob(path, recursive=True)
 
-        print(config.debug)
+        print("Total items in dataset:{}".format(len(dist)+len(undist)))
+  
+
+        print("Debug mode: {}".format(config.debug))
         if config.debug:
             dist = dist[:10]
             undist = undist[:10]
