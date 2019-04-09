@@ -1,6 +1,6 @@
 {
   "exp_name": "blur_model",
-  "num_epochs": 1000,
+  "num_epochs": 200,
   "learning_rate": 0.001,
   "optimizer": "adam",
   "batch_size": 32,
