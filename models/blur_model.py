@@ -1,8 +1,9 @@
 import os
 
 import numpy as np
-from tensorflow.python.keras.layers import (Conv2D, Dense, Dropout, Flatten,
-                                            MaxPool2D, MaxPooling2D)
+from tensorflow.python.keras.layers import (BatchNormalization, Conv2D, Dense,
+                                            Dropout, Flatten, MaxPool2D,
+                                            MaxPooling2D)
 from tensorflow.python.keras.models import Model, Sequential
 
 from base.base_model import BaseModel

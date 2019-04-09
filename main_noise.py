@@ -1,4 +1,4 @@
-from data_loader.data_generator import DataGenerator
+from data_loader.data_loader import DataLoader
 from models.noise_model import NoiseModel
 from trainers.noise_model_trainer import NoiseModelTrainer
 from utils.config import process_config
@@ -20,7 +20,7 @@ def main():
     create_dirs([config.summary_dir, config.checkpoint_dir, config.visual_dir])
 
     print('Create the data generator.')
-    data_generator = DataGenerator(config)
+    data_generator = DataLoader(config)
 
     print('Create the model.')
     model = NoiseModel(config)

@@ -6,7 +6,7 @@ from tensorflow.python.keras.utils import np_utils
 from sklearn.model_selection import train_test_split
 
 
-class DataGenerator:
+class DataLoader:
     def __init__(self, config):
         distorted_paths = config.distorted
         undistorted_paths = config.undistorted
@@ -23,12 +23,11 @@ class DataGenerator:
             undist += glob.glob(path, recursive=True)
 
         print("Total items in dataset:{}".format(len(dist)+len(undist)))
-  
 
         print("Debug mode: {}".format(config.debug))
         if config.debug:
-            dist = dist[:10]
-            undist = undist[:10]
+            dist = dist[:100]
+            undist = undist[:100]
 
         labels_dist = np.ones(len(dist)).astype('int')
         labels_undist = np.zeros(len(undist)).astype('int')
