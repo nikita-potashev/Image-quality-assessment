@@ -2,13 +2,22 @@
 
 ## How to 
 ### Prep data
-`python3 utils/unzip.py --src=datasets/blur/* --dst=datasets/blur/train/`
-`python3 utils/unzip.py --src=datasets/noise/* --dst=datasets/noise/train/`
+```shell
+python3 utils/unzip.py --src=datasets/blur/* --dst=datasets/blur/train/
+```
+```shell
+python3 utils/unzip.py --src=datasets/noise/* --dst=datasets/noise/train/
+```
 ### Train by config
-`python3 main.py -c configs/blur_model.json`
+```shell
+python3 main.py -c configs/blur_model.json
+```
 
 Thx to [Keras Template](https://github.com/Ahmkel/Keras-Project-Template)
 
+```shell
+tensorboard --logd=experiments/noise_model/summary
+```
 ## Sharpness 
 * TOTAL: 8432, %100
 * CLEAR: 3606, %42.76565464895636
@@ -22,8 +31,7 @@ Thx to [Keras Template](https://github.com/Ahmkel/Keras-Project-Template)
 
 
 ## Noise
-??
-
+* Accuracy : ~96%.
 
 1. http://www.fit.vutbr.cz/~vasicek/imagedb/?lev=30&knd=corrupted
 2. https://www.eecs.yorku.ca/~kamel/sidd/dataset.php
