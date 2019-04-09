@@ -111,3 +111,6 @@ datasets/
 
 # experiments
 experiments/
+
+# slurm out files 
+slurm/
