@@ -9,8 +9,7 @@ from base.base_ensemble_train import BaseEnsembleTrain
 
 class BlurEnsembleTrainer(BaseEnsembleTrain):
     def __init__(self, models, data_train, data_test, config):
-        super(BlurEnsembleTrainer, self).__init__(
-            models, data_train, data_test, config)  # models - list of models
+        super(BlurEnsembleTrainer, self).__init__(models, data_train, data_test, config)  # models - list of models
         # self.callbacks = []
         # self.loss = []
         # self.acc = []
@@ -40,8 +39,7 @@ class BlurEnsembleTrainer(BaseEnsembleTrain):
 
     def train_gen(self):
         print(len(self.data_test))
-        datagen = ImageDataGenerator(
-            rotation_range=10, zoom_range=0.1, width_shift_range=0.1, height_shift_range=0.1)
+        datagen = ImageDataGenerator(rotation_range=10, zoom_range=0.1, width_shift_range=0.1, height_shift_range=0.1)
         datagen.fit(self.data_train[0])
         for i in range(len(self.models)):
             self.models[i].fit_generator(datagen.flow(self.data_train[0], self.data_train[1], batch_size=self.config.batch_size),
