@@ -15,8 +15,7 @@ class NoiseModel(BaseModel):
 
     def build_model(self):
         self.model = Sequential()
-        self.model.add(Conv2D(4, (3, 3), activation='relu',
-                              input_shape=(500, 500, 1)))
+        self.model.add(Conv2D(4, (3, 3), activation='relu', input_shape=(500, 500, 1)))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(0.2))
         self.model.add(Conv2D(8, (5, 5), activation='relu'))

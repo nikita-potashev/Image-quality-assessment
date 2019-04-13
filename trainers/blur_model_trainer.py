@@ -51,6 +51,6 @@ class BlurModelTrainer(BaseTrain):
         self.val_acc.extend(history.history['val_acc'])
 
     def visualize(self):
-        plt.plot(self.loss, 'b', label = 'loss')
-        plt.plot(self.val_loss, 'r', label = 'val_loss')
+        plt.plot(self.loss, 'b', label='loss')
+        plt.plot(self.val_loss, 'r', label='val_loss')
         plt.savefig(os.path.join(self.config.visual_dir, '{}.pdf'.format(self.config.exp_name)))

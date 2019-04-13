@@ -19,8 +19,7 @@ class BlurEnsemble(BaseModel):
 
     def build_model_batch_norm(self):
         model = Sequential()
-        model.add(
-            Conv2D(8, (3, 3), activation='relu', input_shape=(500, 500, 1)))
+        model.add(Conv2D(8, (3, 3), activation='relu', input_shape=(500, 500, 1)))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(BatchNormalization())
         model.add(Flatten())
@@ -36,8 +35,7 @@ class BlurEnsemble(BaseModel):
 
     def build_model_high_drop(self):
         model = Sequential()
-        model.add(
-            Conv2D(6, (3, 3), activation='relu', input_shape=(500, 500, 1)))
+        model.add(Conv2D(6, (3, 3), activation='relu', input_shape=(500, 500, 1)))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.35))
         model.add(Flatten())
@@ -52,8 +50,7 @@ class BlurEnsemble(BaseModel):
 
     def build_model_low_drop(self):
         model = Sequential()
-        model.add(
-            Conv2D(5, (3, 3), activation='relu', input_shape=(500, 500, 1)))
+        model.add(Conv2D(5, (3, 3), activation='relu', input_shape=(500, 500, 1)))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.5))
         model.add(Flatten())

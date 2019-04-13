@@ -26,8 +26,7 @@ def main():
     models = BlurEnsemble(config)
 
     print('Create the trainer')
-    trainer = BlurEnsembleTrainer(models.models, data_generator.get_train_data(
-    ), data_generator.get_test_data(), config)
+    trainer = BlurEnsembleTrainer(models.models, data_generator.get_train_data(), data_generator.get_test_data(), config)
 
     print('Start training the model.')
     trainer.train_gen()

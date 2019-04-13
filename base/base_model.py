@@ -23,8 +23,7 @@ class BaseModel:
         raise NotImplementedError
 
     def predict(self, data, batch_size=None, verbose=0, steps=None, callbacks=None):
-        self.model.predict(data, batch_size=batch_size,
-                           verbose=verbose, steps=steps, callbacks=callbacks)
+        self.model.predict(data, batch_size=batch_size, verbose=verbose, steps=steps, callbacks=callbacks)
 
     def predict_classes(self, data, batch_size=32, verbose=1):
         self.model.predict_classes(self, data, batch_size=batch_size, verbose=verbose)
