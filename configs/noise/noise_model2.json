@@ -1,0 +1,21 @@
+{
+  "exp_name": "noise_model2",
+  "num_epochs": 20,
+  "learning_rate": 0.001,
+  "optimizer": "adam",
+  "batch_size": 64,
+  "validation_split": 0.25,
+  "distorted": [
+      
+      "datasets/noise/train/data/**/*.JPG",
+      "datasets/noise/train/BSDBursts/**/*.png"
+
+  ],
+  "undistorted": [
+      "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Undistorted/*"
+
+  ],
+  "debug":0,
+  "color_mode":"grayscale"
+
+}

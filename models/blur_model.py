@@ -35,11 +35,11 @@ class BlurModel(BaseModel):
                            optimizer=config.optimizer,
                            metrics=['accuracy'])
         return self.model
-    
+
     @classmethod
     def build_model2(self, config):
         self.model = Sequential()
-        self.model.add(Conv2D(6, kernel_size=(5, 5), strides=(1, 1), activation='relu', input_shape=(500,500,1), padding="same"))
+        self.model.add(Conv2D(6, kernel_size=(5, 5), strides=(1, 1), activation='relu', input_shape=(500, 500, 1), padding="same"))
         self.model.add(AveragePooling2D(pool_size=(2, 2), strides=(1, 1), padding='valid'))
         self.model.add(Conv2D(16, kernel_size=(5, 5), strides=(1, 1), activation='relu', padding='valid'))
         self.model.add(AveragePooling2D(pool_size=(2, 2), strides=(2, 2), padding='valid'))
@@ -47,33 +47,33 @@ class BlurModel(BaseModel):
         self.model.add(Flatten())
         self.model.add(Dense(84, activation='relu'))
         self.model.add(Dense(2, activation='sigmoid'))
-        self.model.compile(loss='binary_crossentropy',optimizer=config.optimizer,metrics=['accuracy'])
+        self.model.compile(loss='binary_crossentropy', optimizer=config.optimizer, metrics=['accuracy'])
         return self.model
 
     @classmethod
     def build_model3(self, config):
         self.model = Sequential()
-        self.model.add(Conv2D(32, kernel_size = (3,3), activation='relu', input_shape = (500,500,1)))
+        self.model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(500, 500, 1)))
         self.model.add(BatchNormalization())
-        self.model.add(Conv2D(32, kernel_size = (3,3), activation='relu'))
+        self.model.add(Conv2D(32, kernel_size=(3, 3), activation='relu'))
         self.model.add(BatchNormalization())
-        self.model.add(Conv2D(32, kernel_size = (5,5), strides=2, padding='same', activation='relu'))
-        self.model.add(BatchNormalization())
-        self.model.add(Dropout(0.4))
-        self.model.add(Conv2D(64, kernel_size = (3,3), activation='relu'))
-        self.model.add(BatchNormalization())
-        self.model.add(Conv2D(64, kernel_size = (3,3), activation='relu'))
-        self.model.add(BatchNormalization())
-        self.model.add(Conv2D(64, kernel_size = (5,5), strides=2, padding='same', activation='relu'))
+        self.model.add(Conv2D(32, kernel_size=(5, 5), strides=2, padding='same', activation='relu'))
         self.model.add(BatchNormalization())
         self.model.add(Dropout(0.4))
-        self.model.add(Conv2D(128, kernel_size = 4, activation='relu'))
+        self.model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+        self.model.add(BatchNormalization())
+        self.model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+        self.model.add(BatchNormalization())
+        self.model.add(Conv2D(64, kernel_size=(5, 5), strides=2, padding='same', activation='relu'))
+        self.model.add(BatchNormalization())
+        self.model.add(Dropout(0.4))
+        self.model.add(Conv2D(128, kernel_size=4, activation='relu'))
         self.model.add(BatchNormalization())
 
         self.model.add(Flatten())
         self.model.add(Dropout(0.4))
 
-        self.model.add(Dense(2, activation = "sigmoid"))
-        self.model.compile(loss='binary_crossentropy',optimizer=config.optimizer,metrics=['accuracy'])
-        
+        self.model.add(Dense(2, activation="sigmoid"))
+        self.model.compile(loss='binary_crossentropy', optimizer=config.optimizer, metrics=['accuracy'])
+
         return self.model

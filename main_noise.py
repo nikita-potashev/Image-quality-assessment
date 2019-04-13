@@ -25,8 +25,16 @@ def main():
     print('Create the model.')
     model = NoiseModel(config)
 
+    models = {
+
+        'noise_model1' : NoiseModel.build_model1(config),
+        'noise_model2' : NoiseModel.build_model2(config),
+        'noise_model3' : NoiseModel.build_model3(config)
+    }
+
+
     print('Create the trainer')
-    trainer = NoiseModelTrainer(model.model, data_generator.get_train_data(), config)
+    trainer = NoiseModelTrainer(model, data_generator.get_train_data(), config)
 
     print('Start training the model.')
     trainer.train()
