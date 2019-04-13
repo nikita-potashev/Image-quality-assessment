@@ -23,11 +23,11 @@ def main():
     data_generator = DataLoader(config)
 
     print('Create the model.')
-    model = BlurModel(config)
+    model = BlurModel.build_model(config)
 
     print('Create the trainer')
     trainer = BlurModelTrainer(
-        model.model, data_generator.get_train_data(), config)
+        model, data_generator.get_train_data(), config)
 
     print('Start training the model.')
     trainer.train()

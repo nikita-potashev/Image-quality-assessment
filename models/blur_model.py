@@ -12,9 +12,10 @@ from base.base_model import BaseModel
 class BlurModel(BaseModel):
     def __init__(self, config):
         super(BlurModel, self).__init__(config)
-        self.build_model()
+        
 
-    def build_model(self):
+    @classmethod
+    def build_model(self,config):
         self.model = Sequential()
         self.model.add(Conv2D(8, (5, 5), activation='relu',
                               input_shape=(500, 500, 1)))
@@ -33,5 +34,6 @@ class BlurModel(BaseModel):
         self.model.add(Dense(2, activation='sigmoid'))
 
         self.model.compile(loss='binary_crossentropy',
-                           optimizer=self.config.optimizer,
+                           optimizer=config.optimizer,
                            metrics=['accuracy'])
+        return self.model
