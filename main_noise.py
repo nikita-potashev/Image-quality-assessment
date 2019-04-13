@@ -19,12 +19,6 @@ def main():
     # create the experiments dirs
     create_dirs([config.summary_dir, config.checkpoint_dir, config.visual_dir])
 
-    print('Create the data generator.')
-    data_generator = DataLoader(config)
-
-    print('Create the model.')
-    model = NoiseModel(config)
-
     models = {
 
         'noise_model1' : NoiseModel.build_model1(config),
@@ -32,6 +26,12 @@ def main():
         'noise_model3' : NoiseModel.build_model3(config)
     }
 
+
+    print('Create the data generator.')
+    data_generator = DataLoader(config)
+
+    print('Create the model.')
+    model = models[config.exp_name]
 
     print('Create the trainer')
     trainer = NoiseModelTrainer(model, data_generator.get_train_data(), config)
