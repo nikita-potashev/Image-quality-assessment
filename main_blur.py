@@ -16,18 +16,25 @@ def main():
         print("missing or invalid arguments")
         exit(0)
 
+
     # create the experiments dirs
     create_dirs([config.summary_dir, config.checkpoint_dir, config.visual_dir])
+
+    models = {
+
+        'blur_model1' : BlurModel.build_model1(config),
+        'blur_model2' : BlurModel.build_model2(config),
+        'blur_model3' : BlurModel.build_model3(config)
+    }
 
     print('Create the data generator.')
     data_generator = DataLoader(config)
 
     print('Create the model.')
-    model = BlurModel.build_model(config)
+    model = models[config.exp_name]
 
     print('Create the trainer')
-    trainer = BlurModelTrainer(
-        model, data_generator.get_train_data(), config)
+    trainer = BlurModelTrainer(model, data_generator.get_train_data(), config)
 
     print('Start training the model.')
     trainer.train()
