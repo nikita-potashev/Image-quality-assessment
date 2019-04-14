@@ -5,5 +5,4 @@
 #SBATCH --mem=62000
 #SBATCH --output=slurm/%j_b
 #SBATCH --error=slurm/%j_be
-python3 main_blur.py --c configs/blur/blur_model1.json
-
+python3 main_blur.py --c configs/blur/blur_model3.json

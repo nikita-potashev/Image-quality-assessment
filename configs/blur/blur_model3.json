@@ -1,10 +1,10 @@
 {
     "exp_name": "blur_model3",
-    "num_epochs": 20,
+    "num_epochs": 15,
     "learning_rate": 0.001,
     "optimizer": "adam",
-    "batch_size": 64,
-    "validation_split": 0.25,
+    "batch_size": 32,
+    "validation_split": 0.2,
     "distorted": [
       "datasets/blur/train/All_Image_and_Kernels/blur*.jpg",
       "datasets/blur/train/CERTH_ImageBlurDataset/TrainingSet/Artificially-Blurred/*",

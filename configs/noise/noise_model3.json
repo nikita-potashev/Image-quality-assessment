@@ -2,9 +2,9 @@
   "exp_name": "noise_model3",
   "num_epochs": 20,
   "learning_rate": 0.001,
-  "optimizer": "adam",
-  "batch_size": 64,
-  "validation_split": 0.25,
+  "optimizer": "rmsprop",
+  "batch_size": 16,
+  "validation_split": 0.2,
   "distorted": [
       
       "datasets/noise/train/data/**/*.JPG",

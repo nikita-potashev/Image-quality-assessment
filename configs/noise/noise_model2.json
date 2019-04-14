@@ -3,8 +3,8 @@
   "num_epochs": 20,
   "learning_rate": 0.001,
   "optimizer": "adam",
-  "batch_size": 64,
-  "validation_split": 0.25,
+  "batch_size": 32,
+  "validation_split": 0.2,
   "distorted": [
       
       "datasets/noise/train/data/**/*.JPG",
