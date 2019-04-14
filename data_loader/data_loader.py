@@ -39,12 +39,15 @@ class DataLoader:
 
         X_train, X_test, Y_train, Y_test = train_test_split(
             data, categories, test_size=config.validation_split, random_state=2)
+        
+        self.X_train = load_imgs(data, (500, 500, 1), config.color_mode)
+        self.Y_train = categories
 
-        self.X_train = load_imgs(X_train, (500, 500, 1), config.color_mode)
-        self.X_test = load_imgs(X_test, (500, 500, 1), config.color_mode)
+        # self.X_train = load_imgs(X_train, (500, 500, 1), config.color_mode)
+        # self.X_test = load_imgs(X_test, (500, 500, 1), config.color_mode)
 
-        self.Y_train = Y_train
-        self.Y_test = Y_test
+        # self.Y_train = Y_train
+        # self.Y_test = Y_test
 
     def get_train_data(self):
         return self.X_train, self.Y_train
