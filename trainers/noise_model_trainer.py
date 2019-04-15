@@ -20,7 +20,7 @@ class NoiseModelTrainer(BaseTrain):
         self.callbacks.append(
             ModelCheckpoint(
                 filepath=os.path.join(
-                    self.config.checkpoint_dir, '%s-{epoch:02d}-{val_loss:.2f}.hdf5' % self.config.exp_name),
+                    self.config.checkpoint_dir, '%s-{epoch:02d}-{val_loss:.2f}.h5' % self.config.exp_name),
                 monitor='val_loss',
                 mode='min',
                 save_best_only=True,
