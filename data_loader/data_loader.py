@@ -57,8 +57,7 @@ class DataLoader:
 
 
 def read_img(path, input_shape, color_mode='grayscale'):
-    input_img = image.load_img(
-        path, target_size=input_shape, color_mode=color_mode)
+    input_img = image.load_img(path, target_size=input_shape, color_mode=color_mode)
     input_img = image.img_to_array(input_img)
     return input_img
 
