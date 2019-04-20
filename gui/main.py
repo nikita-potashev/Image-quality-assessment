@@ -1,53 +1,61 @@
 from models.blur_model import BlurModel
 from models.noise_model import NoiseModel
-from tensorflow.python.keras.models import load_model
+# from tensorflow.python.keras.models import load_model
 from tensorflow.python.keras.models import model_from_json
 from data_loader.data_loader import read_img
 import numpy as np
 import glob
+import json
 
 
-def load_model(json, weights):
-    json_file = open(json, 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
-    loaded_model.load_weights(weights)
-    return loaded_model
+class Prediction:
+    def __init__(self, saved_models):
+        self.saved_models = saved_models
+        self.models = []
+        self.predictions = {}
+        self.build_models()
 
+    def build_models(self):
+        """
+            load keras model from json and h5
+        """
+        if not self.saved_models:
+            raise ValueError
+            
+        for key, value in self.saved_models.items():
+            json_file = open(key, 'r')
+            loaded_model_json = json_file.read()
+            json_file.close()
+            loaded_model = model_from_json(loaded_model_json)
+            loaded_model.load_weights(value)
+            self.models.append(loaded_model)
 
-def prediction(models_dict, imgs):
-    models = []
-    for k, v in models_dict.items():
-        models.append(load_model(k, v))
+    def predict_class(self, images, input_shape=(500, 500, 1)):
+        if not images:
+            raise ValueError
 
-    predictions = []
-    print(imgs[0])
-    for item in imgs:
-        pred = []
-        for model in models:
-            img = read_img(item, (500, 500, 1))
-            temp = np.array(img, np.float32)/255.0
-            temp = np.expand_dims(temp, axis=0)
-            score = model.predict_classes(temp)[0]
-            pred.append(score)
-        predictions.append(pred)
-    return predictions
+        for image in images:
+            predict_vector = []
+            subpredict_dict = {}
+            for model in self.models:
+                temp = read_img(image, input_shape)
+                temp = np.array(temp, np.float32)/255.0
+                temp = np.expand_dims(temp, axis=0)
 
+                score = model.predict_classes(temp)[0]
+                predict_vector.append(int(score))
 
-def app():
-    models = {
-        'experiments/json/blur/blur1.json': 'experiments/blur_model1/checkpoint/blur_model1-08-0.11.h5',
-        'experiments/json/blur/blur2.json': 'experiments/blur_model2/checkpoint/blur_model2-01-0.05.h5',
-        'experiments/json/blur/blur3.json': 'experiments/blur_model3/checkpoint/blur_model3-12-0.06.h5'
+                subpredict_dict['Blur'] = predict_vector[:3]
+                subpredict_dict['Noise'] = predict_vector[3:]
 
-        # 'models/json/noise/noise1.json': 'experiments/noise_model1/checkpoint/noise_model1-01-7.81.h5',
-        # 'models/json/noise/noise2.json': 'experiments/noise_model2/checkpoint/noise_model2-01-8.11.h5',
-        # 'models/json/noise/noise3.json': 'experiments/noise_model3/checkpoint/noise_model3-01-9.24.h5'
+                if predict_vector[:3].count(1) == 3 or predict_vector[3:].count(1) == 3:
+                    subpredict_dict['TotalPrediction'] = 1
+                else:
+                    subpredict_dict['TotalPrediction'] = max(set(predict_vector), key=predict_vector.count)
 
+            self.predictions[image] = subpredict_dict
 
-
-    }
-    data = glob.glob('/home/nick/Desktop/predict/*.jpg')
-    print(prediction(models, data))
+    def save_predictions(self, path, sort_keys=True):
+        with open(path, 'w') as output:
+            json.dump(self.predictions, output, sort_keys=sort_keys)
 

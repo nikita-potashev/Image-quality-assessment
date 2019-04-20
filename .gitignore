@@ -114,3 +114,5 @@ experiments/
 
 # slurm out files 
 slurm/
+
+data\.json
