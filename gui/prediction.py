@@ -1,11 +1,9 @@
-from models.blur_model import BlurModel
-from models.noise_model import NoiseModel
-# from tensorflow.python.keras.models import load_model
-from tensorflow.python.keras.models import model_from_json
-from data_loader.data_loader import read_img
-import numpy as np
-import glob
 import json
+
+import numpy as np
+from tensorflow.python.keras.models import model_from_json
+
+from data_loader.data_loader import read_img
 
 
 class Prediction:
@@ -21,7 +19,7 @@ class Prediction:
         """
         if not self.saved_models:
             raise ValueError
-            
+
         for key, value in self.saved_models.items():
             json_file = open(key, 'r')
             loaded_model_json = json_file.read()
@@ -58,4 +56,3 @@ class Prediction:
     def save_predictions(self, path, sort_keys=True):
         with open(path, 'w') as output:
             json.dump(self.predictions, output, sort_keys=sort_keys)
-
