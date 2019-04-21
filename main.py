@@ -16,7 +16,7 @@ class Signals(QObject):
 
     prediction_result = pyqtSignal(dict, arguments=['prediction'])
 
-    @pyqtSlot(str)
+    @pyqtSlot(str, result=str)
     def prediction(self, arg1):
         print('Creating prediction models..')
 
@@ -37,7 +37,8 @@ class Signals(QObject):
         lst_data.append(arg1)
         pred.predict_class(lst_data)
         print(pred.predictions)
-        self.prediction_result.emit(pred.predictions)
+        # self.prediction_result.emit(pred.predictions)
+        return str(pred.predictions.values())
 
 
 if __name__ == '__main__':

@@ -44,7 +44,7 @@ ApplicationWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 onClicked: {
 
-                    signals.prediction(single.url_file)
+                    predict_out.text = signals.prediction(single.url_file)
                     busyIndicator.running = true
                 }
             }
