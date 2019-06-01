@@ -4,6 +4,7 @@ import numpy as np
 from tensorflow.python.keras.models import model_from_json
 
 from data_loader.data_loader import read_img
+import time
 
 
 class Prediction:
@@ -28,30 +29,34 @@ class Prediction:
             loaded_model.load_weights(value)
             self.models.append(loaded_model)
 
-    def predict_class(self, images, input_shape=(500, 500, 1)):
-        if not images:
+    def predict_class(self, image, input_shape=(500, 500, 1)):
+
+        if not image:
             raise ValueError
+        # start_time = time.time()
 
-        for image in images:
-            predict_vector = []
-            subpredict_dict = {}
-            for model in self.models:
-                temp = read_img(image, input_shape)
-                temp = np.array(temp, np.float32)/255.0
-                temp = np.expand_dims(temp, axis=0)
+        predict_vector = []
+        subpredict_dict = {}
+        for model in self.models:
+            temp = read_img(image, input_shape)
+            temp = np.array(temp, np.float32)/255.0
+            temp = np.expand_dims(temp, axis=0)
 
-                score = model.predict_classes(temp)[0]
-                predict_vector.append(int(score))
+            score = model.predict_classes(temp)[0]
+            predict_vector.append(int(score))
 
-                subpredict_dict['Blur'] = predict_vector[:3]
-                subpredict_dict['Noise'] = predict_vector[3:]
+            subpredict_dict['Blur'] = predict_vector[:3]
+            subpredict_dict['Noise'] = predict_vector[3:]
 
-                if predict_vector[:3].count(1) == 3 or predict_vector[3:].count(1) == 3:
-                    subpredict_dict['TotalPrediction'] = 1
-                else:
-                    subpredict_dict['TotalPrediction'] = max(set(predict_vector), key=predict_vector.count)
+            if predict_vector[:3].count(1) == 3 or predict_vector[3:].count(1) == 3:
+                subpredict_dict['TotalPrediction'] = 1
+            else:
+                subpredict_dict['TotalPrediction'] = max(set(predict_vector), key=predict_vector.count)
 
-            self.predictions[image] = subpredict_dict
+        self.predictions[image] = subpredict_dict
+        
+        # elapsed_time = time.time() - start_time
+        # print(elapsed_time)
 
     def save_predictions(self, path, sort_keys=True):
         with open(path, 'w') as output:
