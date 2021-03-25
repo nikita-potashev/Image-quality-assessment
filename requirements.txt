@@ -86,7 +86,7 @@ python-dateutil==2.7.5
 python-docx==0.8.10
 python-pptx==0.6.5
 pytz==2018.7
-PyYAML==3.13
+PyYAML==5.4
 pyzmq==17.1.2
 qtconsole==4.4.3
 scikit-learn==0.20.2
