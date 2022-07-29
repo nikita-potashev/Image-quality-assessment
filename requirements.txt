@@ -47,7 +47,7 @@ MarkupSafe==1.1.0
 matplotlib==3.0.2
 mccabe==0.6.1
 med2image==1.1.2
-mistune==0.8.4
+mistune==2.0.3
 mpmath==1.1.0
 mritopng==2.2
 nbconvert==5.4.0
