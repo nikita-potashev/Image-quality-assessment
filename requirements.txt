@@ -50,7 +50,7 @@ med2image==1.1.2
 mistune==0.8.4
 mpmath==1.1.0
 mritopng==2.2
-nbconvert==5.4.0
+nbconvert==6.3.0
 nbformat==4.4.0
 nibabel==2.3.1
 nose==1.3.7
